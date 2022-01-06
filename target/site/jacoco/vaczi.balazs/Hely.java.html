@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="hu"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Hely.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">torpedo-jatek</a> &gt; <a href="index.source.html" class="el_package">vaczi.balazs</a> &gt; <span class="el_source">Hely.java</span></div><h1>Hely.java</h1><pre class="source lang-java linenums">package vaczi.balazs;
+
+public class Hely {
+	// Osztályszintû változók
+<span class="nc" id="L5">	public static int nemTippelt = 0;</span>
+<span class="nc" id="L6">	public static int talalat = 1;</span>
+<span class="nc" id="L7">	public static int melle = 2;</span>
+	private boolean vanHajo;
+	private int allapot;
+	private int hajoHossz;
+	private int hajoIrany;
+
+<span class="nc" id="L13">	public Hely() {</span>
+<span class="nc" id="L14">		allapot = 0;</span>
+<span class="nc" id="L15">		vanHajo = false;</span>
+<span class="nc" id="L16">		hajoHossz = -1;</span>
+<span class="nc" id="L17">		hajoIrany = -1;</span>
+<span class="nc" id="L18">	}</span>
+
+	public boolean talalatVizsgal() {
+<span class="nc bnc" id="L21" title="All 2 branches missed.">		if (allapot == talalat)</span>
+<span class="nc" id="L22">			return true;</span>
+		else
+<span class="nc" id="L24">			return false;</span>
+	}
+
+	public boolean melleVizsgal() {
+<span class="nc bnc" id="L28" title="All 2 branches missed.">		if (allapot == melle)</span>
+<span class="nc" id="L29">			return true;</span>
+		else
+<span class="nc" id="L31">			return false;</span>
+	}
+
+	public boolean korabbiLovesVizsgal() {
+<span class="nc bnc" id="L35" title="All 2 branches missed.">		if (allapot == nemTippelt)</span>
+<span class="nc" id="L36">			return true;</span>
+		else
+<span class="nc" id="L38">			return false;</span>
+	}
+
+	public void talalatJelol() {
+<span class="nc" id="L42">		allapotBeallit(talalat);</span>
+<span class="nc" id="L43">	}</span>
+
+	public void talalatMelle() {
+<span class="nc" id="L46">		allapotBeallit(melle);</span>
+<span class="nc" id="L47">	}</span>
+
+	public boolean vanHajo() {
+<span class="nc" id="L50">		return vanHajo;</span>
+	}
+
+	public void hajoBeallit(boolean ertek) {
+<span class="nc" id="L54">		this.vanHajo = ertek;</span>
+<span class="nc" id="L55">	}</span>
+
+	public void allapotBeallit(int ertek) {
+<span class="nc" id="L58">		this.allapot = ertek;</span>
+<span class="nc" id="L59">	}</span>
+
+	public int allapotLekerdez() {
+<span class="nc" id="L62">		return allapot;</span>
+	}
+
+	public int hajoHosszLekerdez() {
+<span class="nc" id="L66">		return hajoHossz;</span>
+	}
+
+	public void hajoHosszBeallit(int ertek) {
+<span class="nc" id="L70">		hajoHossz = ertek;</span>
+<span class="nc" id="L71">	}</span>
+
+	public int getDirectionOfShip() {
+<span class="nc" id="L74">		return hajoIrany;</span>
+	}
+
+	public void hajoIranyBeallit(int ertek) {
+<span class="nc" id="L78">		hajoIrany = ertek;</span>
+<span class="nc" id="L79">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

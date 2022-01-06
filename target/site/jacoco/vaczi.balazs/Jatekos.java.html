@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="hu"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Jatekos.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">torpedo-jatek</a> &gt; <a href="index.source.html" class="el_package">vaczi.balazs</a> &gt; <span class="el_source">Jatekos.java</span></div><h1>Jatekos.java</h1><pre class="source lang-java linenums">package vaczi.balazs;
+
+public class Jatekos {
+	// Osztályszintû változók
+<span class="nc" id="L5">	private static int[] hajokHossza = { 2, 3, 3, 4, 5 };</span>
+<span class="nc" id="L6">	private static int hajokSzama = 5;</span>
+	public Hajok[] hajok;
+	public Jatekmezo jatekMezoSajat;
+	public Jatekmezo jatekMezoEllenfel;
+
+<span class="nc" id="L11">	public Jatekos() {</span>
+<span class="nc bnc" id="L12" title="All 2 branches missed.">		if (hajokSzama != 5) {</span>
+<span class="nc" id="L13">			System.out.println(&quot;Hiba! A hajók száma mindenképp 5 kell, hogy legyen.&quot;);</span>
+<span class="nc" id="L14">			hajokSzama = 5;</span>
+		}
+
+<span class="nc" id="L17">		hajok = new Hajok[hajokSzama];</span>
+<span class="nc bnc" id="L18" title="All 2 branches missed.">		for (int i = 0; i &lt; hajokSzama; i++) {</span>
+<span class="nc" id="L19">			Hajok ideiglenesHajo = new Hajok(hajokHossza[i]);</span>
+<span class="nc" id="L20">			hajok[i] = ideiglenesHajo;</span>
+		}
+
+<span class="nc" id="L23">		jatekMezoSajat = new Jatekmezo();</span>
+<span class="nc" id="L24">		jatekMezoEllenfel = new Jatekmezo();</span>
+<span class="nc" id="L25">	}</span>
+
+	public void hajoHozzaad() {
+<span class="nc bnc" id="L28" title="All 2 branches missed.">		for (Hajok hajok : hajok) {</span>
+<span class="nc" id="L29">			jatekMezoSajat.hajoHozzaad(hajok);</span>
+		}
+<span class="nc" id="L31">	}</span>
+
+	public int hajokSzama() {
+<span class="nc" id="L34">		int db = 5;</span>
+<span class="nc bnc" id="L35" title="All 2 branches missed.">		for (Hajok hajok : hajok) {</span>
+<span class="nc bnc" id="L36" title="All 4 branches missed.">			if (hajok.pozicioBeallitva() &amp;&amp; hajok.iranyBeallitva())</span>
+<span class="nc" id="L37">				db--;</span>
+		}
+
+<span class="nc" id="L40">		return db;</span>
+
+	}
+
+	public void hajoHelyValaszt(Hajok hajok, int sor, int oszlop, int irany) {
+<span class="nc" id="L45">		hajok.helyBeallit(sor, oszlop);</span>
+<span class="nc" id="L46">		hajok.iranyBeallit(irany);</span>
+<span class="nc" id="L47">		jatekMezoSajat.hajoHozzaad(hajok);</span>
+<span class="nc" id="L48">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

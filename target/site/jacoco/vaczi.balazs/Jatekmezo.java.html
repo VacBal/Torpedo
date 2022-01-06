@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="hu"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Jatekmezo.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">torpedo-jatek</a> &gt; <a href="index.source.html" class="el_package">vaczi.balazs</a> &gt; <span class="el_source">Jatekmezo.java</span></div><h1>Jatekmezo.java</h1><pre class="source lang-java linenums">package vaczi.balazs;
+
+public class Jatekmezo {
+	// Osztályszintû változók
+	private Hely[][] mezo;
+	private int pontok;
+<span class="nc" id="L7">	public static int sorokSzama = 10;</span>
+<span class="nc" id="L8">	public static int oszlopokSzama = 10;</span>
+<span class="nc" id="L9">	SegedMetodusok seged = new SegedMetodusok();</span>
+
+<span class="nc" id="L11">	public Jatekmezo() {</span>
+		int sor, oszlop;
+		Hely ideiglenesHely;
+
+<span class="nc bnc" id="L15" title="All 2 branches missed.">		if (sorokSzama &gt; 26) {</span>
+<span class="nc" id="L16">			System.out.println(&quot;Túl sok sor lett megadva!&quot;);</span>
+<span class="nc" id="L17">			sorokSzama = 26;</span>
+		}
+<span class="nc" id="L19">		mezo = new Hely[sorokSzama][oszlopokSzama];</span>
+
+<span class="nc bnc" id="L21" title="All 2 branches missed.">		for (sor = 0; sor &lt; mezo.length; sor++) {</span>
+<span class="nc bnc" id="L22" title="All 2 branches missed.">			for (oszlop = 0; oszlop &lt; mezo[sor].length; oszlop++) {</span>
+<span class="nc" id="L23">				ideiglenesHely = new Hely();</span>
+<span class="nc" id="L24">				mezo[sor][oszlop] = ideiglenesHely;</span>
+			}
+		}
+<span class="nc" id="L27">	}</span>
+
+	public void talalatJelol(int sor, int oszlop) {
+<span class="nc" id="L30">		mezo[sor][oszlop].talalatJelol();</span>
+<span class="nc" id="L31">		pontok++;</span>
+<span class="nc" id="L32">	}</span>
+
+	public void talalatMelle(int sor, int oszlop) {
+<span class="nc" id="L35">		mezo[sor][oszlop].talalatMelle();</span>
+<span class="nc" id="L36">	}</span>
+
+	public void allapotBeallit(int sor, int oszlop, int allapot) {
+<span class="nc" id="L39">		mezo[sor][oszlop].allapotBeallit(allapot);</span>
+<span class="nc" id="L40">	}</span>
+
+	public int allapotLekerdez(int sor, int oszlop) {
+<span class="nc" id="L43">		return mezo[sor][oszlop].allapotLekerdez();</span>
+	}
+
+	public boolean korabbiLovesVizsgal(int sor, int oszlop) {
+<span class="nc bnc" id="L47" title="All 2 branches missed.">		return !mezo[sor][oszlop].korabbiLovesVizsgal();</span>
+	}
+
+	public void hajoBeallit(int sor, int oszlop, boolean ertek) {
+<span class="nc" id="L51">		mezo[sor][oszlop].hajoBeallit(ertek);</span>
+<span class="nc" id="L52">	}</span>
+
+	public boolean vanHajo(int sor, int oszlop) {
+<span class="nc" id="L55">		return mezo[sor][oszlop].vanHajo();</span>
+	}
+
+	public Hely helyLekerdez(int sor, int oszlop) {
+<span class="nc" id="L59">		return mezo[sor][oszlop];</span>
+	}
+
+	public int sorokSzamaLekerdez() {
+<span class="nc" id="L63">		return sorokSzama;</span>
+	}
+
+	public int oszlopokSzamaLekerdez() {
+<span class="nc" id="L67">		return oszlopokSzama;</span>
+	}
+
+	public void kiiratAllapot() {
+<span class="nc" id="L71">		kiiaratasMezo(0);</span>
+<span class="nc" id="L72">	}</span>
+
+	public void hajokKiir() {
+<span class="nc" id="L75">		kiiaratasMezo(1);</span>
+<span class="nc" id="L76">	}</span>
+
+	public void kiirat() {
+<span class="nc" id="L79">		kiiaratasMezo(2);</span>
+<span class="nc" id="L80">	}</span>
+
+	public boolean vesztettVizsgal() {
+<span class="nc bnc" id="L83" title="All 2 branches missed.">		if (pontok &gt;= 17)</span>
+<span class="nc" id="L84">			return true;</span>
+		else
+<span class="nc" id="L86">			return false;</span>
+	}
+
+	public void hajoHozzaad(Hajok hajok) {
+<span class="nc" id="L90">		int sor = hajok.sorLekerdez();</span>
+<span class="nc" id="L91">		int oszlop = hajok.oszlopLekerdez();</span>
+<span class="nc" id="L92">		int hossz = hajok.hosszLekerdez();</span>
+<span class="nc" id="L93">		int irany = hajok.iranyLekerdez();</span>
+
+<span class="nc bnc" id="L95" title="All 4 branches missed.">		if (!(hajok.iranyBeallitva()) || !(hajok.pozicioBeallitva()))</span>
+<span class="nc" id="L96">			throw new IllegalArgumentException(&quot;A hajó iránya vagy pozíciója nincs beállítva.&quot;);</span>
+
+<span class="nc bnc" id="L98" title="All 2 branches missed.">		if (irany == 0) {</span>
+<span class="nc bnc" id="L99" title="All 2 branches missed.">			for (int i = oszlop; i &lt; oszlop + hossz; i++) {</span>
+<span class="nc" id="L100">				mezo[sor][i].hajoBeallit(true);</span>
+<span class="nc" id="L101">				mezo[sor][i].hajoHosszBeallit(hossz);</span>
+<span class="nc" id="L102">				mezo[sor][i].hajoIranyBeallit(irany);</span>
+			}
+<span class="nc bnc" id="L104" title="All 2 branches missed.">		} else if (irany == 1) {</span>
+<span class="nc bnc" id="L105" title="All 2 branches missed.">			for (int i = sor; i &lt; sor + hossz; i++) {</span>
+<span class="nc" id="L106">				mezo[i][oszlop].hajoBeallit(true);</span>
+<span class="nc" id="L107">				mezo[i][oszlop].hajoHosszBeallit(hossz);</span>
+<span class="nc" id="L108">				mezo[i][oszlop].hajoIranyBeallit(irany);</span>
+			}
+		}
+<span class="nc" id="L111">	}</span>
+
+	void kiiaratasMezo(int kiiratasModja) {
+		int utolsoBetu;
+		char karakter;
+
+<span class="nc" id="L117">		System.out.println();</span>
+
+<span class="nc" id="L119">		System.out.print(&quot;\t&quot;);</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">		for (int i = 1; i &lt;= oszlopokSzama; i++) {</span>
+<span class="nc" id="L121">			System.out.print(i + &quot; &quot;);</span>
+		}
+<span class="nc" id="L123">		System.out.println();</span>
+<span class="nc" id="L124">		System.out.println();</span>
+<span class="nc" id="L125">		System.out.println();</span>
+
+<span class="nc" id="L127">		utolsoBetu = (sorokSzama - 1) + 65;</span>
+<span class="nc bnc" id="L128" title="All 2 branches missed.">		for (int i = 65; i &lt;= utolsoBetu; i++) {</span>
+<span class="nc" id="L129">			karakter = (char) i;</span>
+<span class="nc" id="L130">			System.out.print(karakter + &quot;\t&quot;);</span>
+
+<span class="nc bnc" id="L132" title="All 2 branches missed.">			for (int j = 0; j &lt; oszlopokSzama; j++) {</span>
+<span class="nc bnc" id="L133" title="All 2 branches missed.">				if (kiiratasModja == 0) {</span>
+<span class="nc bnc" id="L134" title="All 2 branches missed.">					if (mezo[seged.szamlaloTombKonvertal(i)][j].korabbiLovesVizsgal())</span>
+<span class="nc" id="L135">						System.out.print(&quot;. &quot;);</span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">					else if (mezo[seged.szamlaloTombKonvertal(i)][j].melleVizsgal())</span>
+<span class="nc" id="L137">						System.out.print(&quot;O &quot;);</span>
+<span class="nc bnc" id="L138" title="All 2 branches missed.">					else if (mezo[seged.szamlaloTombKonvertal(i)][j].talalatVizsgal())</span>
+<span class="nc" id="L139">						System.out.print(&quot;X &quot;);</span>
+<span class="nc bnc" id="L140" title="All 2 branches missed.">				} else if (kiiratasModja == 1) {</span>
+<span class="nc bnc" id="L141" title="All 2 branches missed.">					if (mezo[seged.szamlaloTombKonvertal(i)][j].vanHajo()) {</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">						if (mezo[seged.szamlaloTombKonvertal(i)][j].hajoHosszLekerdez() == 2) {</span>
+<span class="nc" id="L143">							System.out.print(&quot;2 &quot;);</span>
+<span class="nc bnc" id="L144" title="All 2 branches missed.">						} else if (mezo[seged.szamlaloTombKonvertal(i)][j].hajoHosszLekerdez() == 3) {</span>
+<span class="nc" id="L145">							System.out.print(&quot;3 &quot;);</span>
+<span class="nc bnc" id="L146" title="All 2 branches missed.">						} else if (mezo[seged.szamlaloTombKonvertal(i)][j].hajoHosszLekerdez() == 4) {</span>
+<span class="nc" id="L147">							System.out.print(&quot;4 &quot;);</span>
+<span class="nc bnc" id="L148" title="All 2 branches missed.">						} else if (mezo[seged.szamlaloTombKonvertal(i)][j].hajoHosszLekerdez() == 5) {</span>
+<span class="nc" id="L149">							System.out.print(&quot;5 &quot;);</span>
+						}
+					}
+
+<span class="nc bnc" id="L153" title="All 2 branches missed.">					else if (!(mezo[seged.szamlaloTombKonvertal(i)][j].vanHajo())) {</span>
+<span class="nc" id="L154">						System.out.print(&quot;. &quot;);</span>
+					}
+
+				} else {
+<span class="nc bnc" id="L158" title="All 2 branches missed.">					if (mezo[seged.szamlaloTombKonvertal(i)][j].talalatVizsgal())</span>
+<span class="nc" id="L159">						System.out.print(&quot;X &quot;);</span>
+<span class="nc bnc" id="L160" title="All 2 branches missed.">					else if (mezo[seged.szamlaloTombKonvertal(i)][j].vanHajo()) {</span>
+<span class="nc bnc" id="L161" title="All 2 branches missed.">						if (mezo[seged.szamlaloTombKonvertal(i)][j].hajoHosszLekerdez() == 2) {</span>
+<span class="nc" id="L162">							System.out.print(&quot;2 &quot;);</span>
+<span class="nc bnc" id="L163" title="All 2 branches missed.">						} else if (mezo[seged.szamlaloTombKonvertal(i)][j].hajoHosszLekerdez() == 3) {</span>
+<span class="nc" id="L164">							System.out.print(&quot;3 &quot;);</span>
+<span class="nc bnc" id="L165" title="All 2 branches missed.">						} else if (mezo[seged.szamlaloTombKonvertal(i)][j].hajoHosszLekerdez() == 4) {</span>
+<span class="nc" id="L166">							System.out.print(&quot;4 &quot;);</span>
+<span class="nc bnc" id="L167" title="All 2 branches missed.">						} else if (mezo[seged.szamlaloTombKonvertal(i)][j].hajoHosszLekerdez() == 5) {</span>
+<span class="nc" id="L168">							System.out.print(&quot;5 &quot;);</span>
+						}
+<span class="nc bnc" id="L170" title="All 2 branches missed.">					} else if (!(mezo[seged.szamlaloTombKonvertal(i)][j].vanHajo())) {</span>
+<span class="nc" id="L171">						System.out.print(&quot;. &quot;);</span>
+					}
+				}
+			}
+<span class="nc" id="L175">			System.out.println();</span>
+		}
+<span class="nc" id="L177">	}</span>
+
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

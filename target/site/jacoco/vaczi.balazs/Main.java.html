@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="hu"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Main.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">torpedo-jatek</a> &gt; <a href="index.source.html" class="el_package">vaczi.balazs</a> &gt; <span class="el_source">Main.java</span></div><h1>Main.java</h1><pre class="source lang-java linenums">package vaczi.balazs;
+
+import java.util.Scanner;
+import java.util.Random;
+
+<span class="nc" id="L6">public class Main {</span>
+<span class="nc" id="L7">	static Scanner beolvaso = new Scanner(System.in);</span>
+<span class="nc" id="L8">	static SegedMetodusok seged = new SegedMetodusok();</span>
+
+	public static void main(String[] args) {
+<span class="nc" id="L11">		Jatekos jatekos01 = new Jatekos();</span>
+<span class="nc" id="L12">		Jatekos jatekosAi = new Jatekos();</span>
+<span class="nc" id="L13">		String eredmeny = &quot;&quot;;</span>
+
+<span class="nc" id="L15">		System.out.println(&quot;Játék kezdete\n- - - - - - - - - -&quot;);</span>
+<span class="nc" id="L16">		System.out.println(&quot;Hajók lerakása:&quot;);</span>
+<span class="nc" id="L17">		hajokLearakasa(jatekos01);</span>
+<span class="nc" id="L18">		System.out.println(&quot;A játékos minden hajót letett a játéktérre.&quot;);</span>
+
+<span class="nc" id="L20">		hajokLerakasaAi(jatekosAi);</span>
+<span class="nc" id="L21">		System.out.println(&quot;A számítógép minden hajót letett a játéktérre.&quot;);</span>
+
+		while (true) {
+<span class="nc" id="L24">			System.out.println(eredmeny);</span>
+<span class="nc" id="L25">			System.out.println(&quot;Játékos lõ:&quot;);</span>
+<span class="nc" id="L26">			eredmeny = talalatVizsgalat(jatekos01, jatekosAi);</span>
+
+<span class="nc bnc" id="L28" title="All 2 branches missed.">			if (jatekos01.jatekMezoSajat.vesztettVizsgal()) {</span>
+<span class="nc" id="L29">				System.out.println(&quot;A játékos vesztett.&quot;);</span>
+<span class="nc" id="L30">				break;</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">			} else if (jatekosAi.jatekMezoSajat.vesztettVizsgal()) {</span>
+<span class="nc" id="L32">				System.out.println(&quot;A számítógép vesztett.&quot;);</span>
+<span class="nc" id="L33">				break;</span>
+			}
+
+<span class="nc" id="L36">			System.out.println(&quot;A számítógép lõ:&quot;);</span>
+<span class="nc" id="L37">			aiLoves(jatekosAi, jatekos01);</span>
+		}
+<span class="nc" id="L39">	}</span>
+
+	private static void aiLoves(Jatekos ai, Jatekos jatekos01) {
+		int sor, oszlop;
+<span class="nc" id="L43">		Random generator = new Random();</span>
+
+<span class="nc" id="L45">		sor = generator.nextInt(10);</span>
+<span class="nc" id="L46">		oszlop = generator.nextInt(10);</span>
+
+<span class="nc bnc" id="L48" title="All 2 branches missed.">		while (ai.jatekMezoEllenfel.korabbiLovesVizsgal(sor, oszlop)) {</span>
+<span class="nc" id="L49">			sor = generator.nextInt(10);</span>
+<span class="nc" id="L50">			oszlop = generator.nextInt(10);</span>
+		}
+
+<span class="nc bnc" id="L53" title="All 2 branches missed.">		if (jatekos01.jatekMezoSajat.vanHajo(sor, oszlop)) {</span>
+<span class="nc" id="L54">			ai.jatekMezoEllenfel.talalatJelol(sor, oszlop);</span>
+<span class="nc" id="L55">			jatekos01.jatekMezoSajat.talalatJelol(sor, oszlop);</span>
+<span class="nc" id="L56">			System.out.println(&quot;Számítógép találat: &quot; + seged.egeszbolBetu(sor) + seged.oszlopbolBetu(oszlop));</span>
+		} else {
+<span class="nc" id="L58">			ai.jatekMezoEllenfel.talalatMelle(sor, oszlop);</span>
+<span class="nc" id="L59">			jatekos01.jatekMezoSajat.talalatMelle(sor, oszlop);</span>
+<span class="nc" id="L60">			System.out.println(&quot;Számítógép mellé: &quot; + seged.egeszbolBetu(sor) + seged.oszlopbolBetu(oszlop));</span>
+		}
+
+<span class="nc" id="L63">		System.out.println(&quot;A játéktér:&quot;);</span>
+<span class="nc" id="L64">		beolvaso.nextLine();</span>
+<span class="nc" id="L65">		jatekos01.jatekMezoSajat.kiirat();</span>
+<span class="nc" id="L66">		beolvaso.nextLine();</span>
+<span class="nc" id="L67">	}</span>
+
+	private static String talalatVizsgalat(Jatekos jatekos01, Jatekos ellenfel) {
+		int sor, oszlop, regiOszlop;
+		String regiSor;
+
+<span class="nc" id="L73">		System.out.println(&quot;Tippek kiíratása:&quot;);</span>
+<span class="nc" id="L74">		jatekos01.jatekMezoEllenfel.kiiratAllapot();</span>
+<span class="nc" id="L75">		sor = -1;</span>
+<span class="nc" id="L76">		oszlop = -1;</span>
+<span class="nc" id="L77">		regiSor = &quot;Z&quot;;</span>
+<span class="nc" id="L78">		regiOszlop = -1;</span>
+
+		while (true) {
+<span class="nc" id="L81">			System.out.print(&quot;Add meg a sort: &quot;);</span>
+<span class="nc" id="L82">			String jatekosBeolvasSor = beolvaso.next();</span>
+<span class="nc" id="L83">			jatekosBeolvasSor = jatekosBeolvasSor.toUpperCase();</span>
+<span class="nc" id="L84">			regiSor = jatekosBeolvasSor;</span>
+<span class="nc" id="L85">			sor = seged.betubolSzam(jatekosBeolvasSor);</span>
+
+<span class="nc" id="L87">			System.out.print(&quot;Add meg az oszlopot: &quot;);</span>
+<span class="nc" id="L88">			oszlop = beolvaso.nextInt();</span>
+<span class="nc" id="L89">			regiOszlop = oszlop;</span>
+<span class="nc" id="L90">			oszlop = seged.oszlopKonvertal(oszlop);</span>
+
+<span class="nc bnc" id="L92" title="All 6 branches missed.">			if (oszlop &gt;= 0 &amp;&amp; oszlop &lt;= 9 &amp;&amp; sor != -1)</span>
+<span class="nc" id="L93">				break;</span>
+<span class="nc" id="L94">			System.out.println(&quot;Hibás mezõ!&quot;);</span>
+<span class="nc" id="L95">		}</span>
+
+<span class="nc bnc" id="L97" title="All 2 branches missed.">		if (ellenfel.jatekMezoSajat.vanHajo(sor, oszlop)) {</span>
+<span class="nc" id="L98">			jatekos01.jatekMezoEllenfel.talalatJelol(sor, oszlop);</span>
+<span class="nc" id="L99">			ellenfel.jatekMezoSajat.talalatJelol(sor, oszlop);</span>
+<span class="nc" id="L100">			return &quot;Játékos találat: &quot; + regiSor + regiOszlop;</span>
+		} else {
+<span class="nc" id="L102">			jatekos01.jatekMezoEllenfel.talalatMelle(sor, oszlop);</span>
+<span class="nc" id="L103">			ellenfel.jatekMezoSajat.talalatMelle(sor, oszlop);</span>
+<span class="nc" id="L104">			return &quot;Játékos mellé: &quot; + regiSor + regiOszlop;</span>
+		}
+	}
+
+	private static void hajokLearakasa(Jatekos jatekos) {
+		int szamlalo, szamlalo2, sor, oszlop, irany;
+		String jatekosSor;
+
+<span class="nc" id="L112">		jatekos.jatekMezoSajat.hajokKiir();</span>
+<span class="nc" id="L113">		System.out.println();</span>
+<span class="nc" id="L114">		szamlalo = 1;</span>
+<span class="nc" id="L115">		szamlalo2 = 0;</span>
+
+<span class="nc bnc" id="L117" title="All 2 branches missed.">		while (jatekos.hajokSzama() &gt; 0) {</span>
+<span class="nc bnc" id="L118" title="All 2 branches missed.">			for (Hajok hajok : jatekos.hajok) {</span>
+<span class="nc" id="L119">				System.out.println(&quot;Hajó száma: &quot; + szamlalo + &quot;. Hossza: &quot; + hajok.hosszLekerdez());</span>
+<span class="nc" id="L120">				sor = -1;</span>
+<span class="nc" id="L121">				oszlop = -1;</span>
+<span class="nc" id="L122">				irany = -1;</span>
+
+				while (true) {
+<span class="nc" id="L125">					System.out.print(&quot;Add meg a sort: &quot;);</span>
+<span class="nc" id="L126">					jatekosSor = beolvaso.next();</span>
+<span class="nc" id="L127">					jatekosSor = jatekosSor.toUpperCase();</span>
+<span class="nc" id="L128">					sor = seged.betubolSzam(jatekosSor);</span>
+
+<span class="nc" id="L130">					System.out.print(&quot;Add meg az oszlopot: &quot;);</span>
+<span class="nc" id="L131">					oszlop = beolvaso.nextInt();</span>
+<span class="nc" id="L132">					oszlop = seged.oszlopKonvertal(oszlop);</span>
+
+<span class="nc" id="L134">					System.out.print(&quot;Irány: \n0 - vízszintes\n1 - függõleges&quot;);</span>
+<span class="nc" id="L135">					irany = beolvaso.nextInt();</span>
+
+<span class="nc bnc" id="L137" title="All 8 branches missed.">					if (oszlop &gt;= 0 &amp;&amp; oszlop &lt;= 9 &amp;&amp; sor != -1 &amp;&amp; irany != -1) {</span>
+<span class="nc bnc" id="L138" title="All 2 branches missed.">						if (!hibaVizsgal(sor, oszlop, irany, jatekos, szamlalo2)) {</span>
+<span class="nc" id="L139">							break;</span>
+						}
+					}
+<span class="nc" id="L142">					System.out.println(&quot;Hibás mezõ!&quot;);</span>
+				}
+
+<span class="nc" id="L145">				jatekos.hajok[szamlalo2].helyBeallit(sor, oszlop);</span>
+<span class="nc" id="L146">				jatekos.hajok[szamlalo2].iranyBeallit(irany);</span>
+<span class="nc" id="L147">				jatekos.jatekMezoSajat.hajoHozzaad(jatekos.hajok[szamlalo2]);</span>
+<span class="nc" id="L148">				jatekos.jatekMezoSajat.hajokKiir();</span>
+<span class="nc" id="L149">				System.out.println();</span>
+<span class="nc" id="L150">				System.out.println(&quot;Még letehetsz &quot; + jatekos.hajokSzama() + &quot; db hajót.&quot;);</span>
+<span class="nc" id="L151">				szamlalo2++;</span>
+<span class="nc" id="L152">				szamlalo++;</span>
+			}
+		}
+<span class="nc" id="L155">	}</span>
+
+	private static void hajokLerakasaAi(Jatekos jatekos) {
+<span class="nc" id="L158">		int sor, oszlop, irany, szamlalo = 1, szamlalo2 = 0;</span>
+<span class="nc" id="L159">		Random generator = new Random();</span>
+
+<span class="nc bnc" id="L161" title="All 2 branches missed.">		while (jatekos.hajokSzama() &gt; 0) {</span>
+<span class="nc bnc" id="L162" title="All 2 branches missed.">			for (Hajok hajok : jatekos.hajok) {</span>
+<span class="nc" id="L163">				sor = generator.nextInt(10);</span>
+<span class="nc" id="L164">				oszlop = generator.nextInt(10);</span>
+<span class="nc" id="L165">				irany = generator.nextInt(2);</span>
+
+<span class="nc bnc" id="L167" title="All 2 branches missed.">				while (hibaVizsgalAi(sor, oszlop, irany, jatekos, szamlalo2)) {</span>
+<span class="nc" id="L168">					sor = generator.nextInt(10);</span>
+<span class="nc" id="L169">					oszlop = generator.nextInt(10);</span>
+<span class="nc" id="L170">					irany = generator.nextInt(2);</span>
+				}
+
+<span class="nc" id="L173">				jatekos.hajok[szamlalo2].helyBeallit(sor, oszlop);</span>
+<span class="nc" id="L174">				jatekos.hajok[szamlalo2].iranyBeallit(irany);</span>
+<span class="nc" id="L175">				jatekos.jatekMezoSajat.hajoHozzaad(jatekos.hajok[szamlalo2]);</span>
+<span class="nc" id="L176">				szamlalo2++;</span>
+<span class="nc" id="L177">				szamlalo++;</span>
+			}
+		}
+<span class="nc" id="L180">	}</span>
+
+	private static boolean hibaVizsgal(int sor, int oszlop, int irany, Jatekos jatekos, int db) {
+<span class="nc" id="L183">		int ell, hossz = jatekos.hajok[db].hosszLekerdez();</span>
+
+<span class="nc bnc" id="L185" title="All 2 branches missed.">		if (irany == 0) {</span>
+<span class="nc" id="L186">			ell = hossz + oszlop;</span>
+<span class="nc bnc" id="L187" title="All 2 branches missed.">			if (ell &gt; 10) {</span>
+<span class="nc" id="L188">				System.out.println(&quot;Hiba, a hajó nem fér be a megadott mezõbe.&quot;);</span>
+<span class="nc" id="L189">				return true;</span>
+			}
+		}
+
+<span class="nc bnc" id="L193" title="All 2 branches missed.">		if (irany == 1) {</span>
+<span class="nc" id="L194">			ell = hossz + sor;</span>
+<span class="nc bnc" id="L195" title="All 2 branches missed.">			if (ell &gt; 10) {</span>
+<span class="nc" id="L196">				System.out.println(&quot;Hiba, a hajó nem fér be a megadott mezõbe.&quot;);</span>
+<span class="nc" id="L197">				return true;</span>
+			}
+		}
+
+<span class="nc bnc" id="L201" title="All 2 branches missed.">		if (irany == 0) {</span>
+<span class="nc bnc" id="L202" title="All 2 branches missed.">			for (int i = oszlop; i &lt; oszlop + hossz; i++) {</span>
+<span class="nc bnc" id="L203" title="All 2 branches missed.">				if (jatekos.jatekMezoSajat.vanHajo(sor, i)) {</span>
+<span class="nc" id="L204">					System.out.println(&quot;Hiba, a megadott mezõn már van egy hajó.&quot;);</span>
+<span class="nc" id="L205">					return true;</span>
+				}
+			}
+<span class="nc bnc" id="L208" title="All 2 branches missed.">		} else if (irany == 1) {</span>
+<span class="nc bnc" id="L209" title="All 2 branches missed.">			for (int i = sor; i &lt; sor + hossz; i++) {</span>
+<span class="nc bnc" id="L210" title="All 2 branches missed.">				if (jatekos.jatekMezoSajat.vanHajo(i, oszlop)) {</span>
+<span class="nc" id="L211">					System.out.println(&quot;Hiba, a megadott mezõn már van egy hajó.&quot;);</span>
+<span class="nc" id="L212">					return true;</span>
+				}
+			}
+		}
+<span class="nc" id="L216">		return false;</span>
+	}
+
+	private static boolean hibaVizsgalAi(int sor, int oszlop, int irany, Jatekos jatekos, int db) {
+<span class="nc" id="L220">		int ell, hossz = jatekos.hajok[db].hosszLekerdez();</span>
+
+<span class="nc bnc" id="L222" title="All 2 branches missed.">		if (irany == 0) {</span>
+<span class="nc" id="L223">			ell = hossz + oszlop;</span>
+<span class="nc bnc" id="L224" title="All 2 branches missed.">			if (ell &gt; 10) {</span>
+<span class="nc" id="L225">				return true;</span>
+			}
+		}
+
+<span class="nc bnc" id="L229" title="All 2 branches missed.">		if (irany == 1) {</span>
+<span class="nc" id="L230">			ell = hossz + sor;</span>
+<span class="nc bnc" id="L231" title="All 2 branches missed.">			if (ell &gt; 10) {</span>
+<span class="nc" id="L232">				return true;</span>
+			}
+		}
+
+<span class="nc bnc" id="L236" title="All 2 branches missed.">		if (irany == 0) {</span>
+<span class="nc bnc" id="L237" title="All 2 branches missed.">			for (int i = oszlop; i &lt; oszlop + hossz; i++) {</span>
+<span class="nc bnc" id="L238" title="All 2 branches missed.">				if (jatekos.jatekMezoSajat.vanHajo(sor, i)) {</span>
+<span class="nc" id="L239">					return true;</span>
+				}
+			}
+<span class="nc bnc" id="L242" title="All 2 branches missed.">		} else if (irany == 1) {</span>
+<span class="nc bnc" id="L243" title="All 2 branches missed.">			for (int i = sor; i &lt; sor + hossz; i++) {</span>
+<span class="nc bnc" id="L244" title="All 2 branches missed.">				if (jatekos.jatekMezoSajat.vanHajo(i, oszlop)) {</span>
+<span class="nc" id="L245">					return true;</span>
+				}
+			}
+		}
+<span class="nc" id="L249">		return false;</span>
+	}
+
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

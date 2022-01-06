@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="hu"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Hajok.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">torpedo-jatek</a> &gt; <a href="index.source.html" class="el_package">vaczi.balazs</a> &gt; <span class="el_source">Hajok.java</span></div><h1>Hajok.java</h1><pre class="source lang-java linenums">package vaczi.balazs;
+
+public class Hajok {
+	// Osztályszintû változók
+	private int sor;
+	private int oszlop;
+	private int hossz;
+	private int irany;
+<span class="nc" id="L9">	public static int beallitva = -1;</span>
+<span class="nc" id="L10">	public static int vizszintes = 0;</span>
+<span class="nc" id="L11">	public static int fuggoleges = 1;</span>
+
+<span class="nc" id="L13">	public Hajok(int hossz) {</span>
+<span class="nc" id="L14">		this.hossz = hossz;</span>
+<span class="nc" id="L15">		this.sor = -1;</span>
+<span class="nc" id="L16">		this.oszlop = -1;</span>
+<span class="nc" id="L17">		this.irany = beallitva;</span>
+<span class="nc" id="L18">	}</span>
+
+	public boolean pozicioBeallitva() {
+<span class="nc bnc" id="L21" title="All 4 branches missed.">		if (sor == -1 || oszlop == -1)</span>
+<span class="nc" id="L22">			return false;</span>
+		else
+<span class="nc" id="L24">			return true;</span>
+	}
+
+	public boolean iranyBeallitva() {
+<span class="nc bnc" id="L28" title="All 2 branches missed.">		if (irany == beallitva)</span>
+<span class="nc" id="L29">			return false;</span>
+		else
+<span class="nc" id="L31">			return true;</span>
+	}
+
+	public void helyBeallit(int sor2, int oszlop2) {
+<span class="nc" id="L35">		this.sor = sor2;</span>
+<span class="nc" id="L36">		this.oszlop = oszlop2;</span>
+<span class="nc" id="L37">	}</span>
+
+	public void iranyBeallit(int iranySajat) {
+<span class="nc bnc" id="L40" title="All 6 branches missed.">		if (iranySajat != beallitva &amp;&amp; iranySajat != vizszintes &amp;&amp; iranySajat != fuggoleges)</span>
+<span class="nc" id="L41">			throw new IllegalArgumentException(&quot;Hibás irány!&quot;);</span>
+<span class="nc" id="L42">		this.irany = iranySajat;</span>
+<span class="nc" id="L43">	}</span>
+
+	public int sorLekerdez() {
+<span class="nc" id="L46">		return sor;</span>
+	}
+
+	public int oszlopLekerdez() {
+<span class="nc" id="L50">		return oszlop;</span>
+	}
+
+	public int hosszLekerdez() {
+<span class="nc" id="L54">		return hossz;</span>
+	}
+
+	public int iranyLekerdez() {
+<span class="nc" id="L58">		return irany;</span>
+	}
+
+	private String directionToString() {
+<span class="nc bnc" id="L62" title="All 2 branches missed.">		if (irany == beallitva)</span>
+<span class="nc" id="L63">			return &quot;Nincs megadva.&quot;;</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">		else if (irany == vizszintes)</span>
+<span class="nc" id="L65">			return &quot;Vízszintes&quot;;</span>
+		else
+<span class="nc" id="L67">			return &quot;Függõleges&quot;;</span>
+	}
+
+	public String toString() {
+<span class="nc" id="L71">		return &quot;Hajó: &quot; + sorLekerdez() + &quot;, &quot; + oszlopLekerdez() + &quot;, hossz: &quot; + hosszLekerdez() + &quot;, irány: &quot;</span>
+<span class="nc" id="L72">				+ directionToString();</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Created-By: Váczi Balázs
+Main-Class: vaczi.balazs.Main
