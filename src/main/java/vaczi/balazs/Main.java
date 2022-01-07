@@ -1,13 +1,20 @@
 package vaczi.balazs;
 
-import java.util.Scanner;
-import java.util.Random;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.*;
 
 public class Main {
 	static Scanner beolvaso = new Scanner(System.in);
 	static SegedMetodusok seged = new SegedMetodusok();
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
+
+		System.out.print("Add meg a nevedet: ");
+		String jatekosNeve = beolvaso.next();
+
 		Jatekos jatekos01 = new Jatekos();
 		Jatekos jatekosAi = new Jatekos();
 		String eredmeny = "";
@@ -27,9 +34,12 @@ public class Main {
 
 			if (jatekos01.jatekMezoSajat.vesztettVizsgal()) {
 				System.out.println("A játékos vesztett.");
+				highscoreKiirat();
 				break;
 			} else if (jatekosAi.jatekMezoSajat.vesztettVizsgal()) {
 				System.out.println("A számítógép vesztett.");
+				highscoreFrissit(jatekosNeve);
+				highscoreKiirat();
 				break;
 			}
 
@@ -249,5 +259,44 @@ public class Main {
 		return false;
 	}
 
-	
+	private static void highscoreFrissit(String jatekos) throws IOException {
+
+		ArrayList<String> fileread = new ArrayList<>();
+
+		try (Scanner s = new Scanner(new FileReader("highscore.txt"))) {
+			while (s.hasNext()) {
+				fileread.add(s.nextLine());
+			}
+		} catch (FileNotFoundException e) {
+
+		}
+
+		FileWriter myWriter = new FileWriter("highscore.txt");
+
+		for (int i = 0; i < fileread.toArray().length; i++) {
+			myWriter.write(String.valueOf(fileread.toArray()[i]));
+			myWriter.write("\n");
+		}
+		myWriter.write(jatekos);
+		myWriter.close();
+	}
+
+	private static void highscoreKiirat(){
+		ArrayList<String> result = new ArrayList<>();
+
+		try (Scanner s = new Scanner(new FileReader("highscore.txt"))) {
+			while (s.hasNext()) {
+				result.add(s.nextLine());
+			}
+		} catch (FileNotFoundException e) {
+
+		}
+
+		List asList = Arrays.asList(result.toArray());
+		Set<String> mySet = new HashSet<String>(asList);
+
+		for(String s: mySet){
+			System.out.println(s + " " + Collections.frequency(asList,s));
+		}
+	}
 }
